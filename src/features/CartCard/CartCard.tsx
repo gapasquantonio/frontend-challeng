@@ -3,12 +3,12 @@ import Flex from "../../components/Flex";
 import { CartCardContainer } from "./CartCard.styles";
 import { Cart } from "../../models/Cart";
 import { css } from "@emotion/react";
-import { StyledText } from "../../components/Text";
 import theme from "../../theme";
 import {
   IconMinusComponentMobile,
   IconPlusComponentMobile,
 } from "../../assets/icons";
+import { StyledText } from "../../components";
 
 export interface CartCardComponentProps {
   cartDetails: Cart[];
