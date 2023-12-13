@@ -1,27 +1,28 @@
 import React from "react";
 import styles from "./HomePage.styles";
 import useIsMobile from "../../hooks/useIsMobile";
-import CarousselMenu from "../../features/CarousselMenu";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectMenuDetails } from "../../store/menu/menu.slice";
 import { MenuSection } from "../../models/MenuDetails";
-import SectionMenu from "../../features/SectionMenu";
-import CartCard from "../../features/CartCard/CartCard";
 import { css } from "@emotion/react";
 import { LinkButton, Button, Flex, SearchBar } from "../../components/";
 import { selectCartDetails } from "../../store/cart/cart.slice";
 import { closeModal } from "../../store/modal/modal.slice";
-import { CartDetailComponent } from "../../features/CartDetail";
 import { Cart } from "../../models/Cart";
 import { selectSelectedRestaurantDetails } from "../../store/restaurant/restaurant.slice";
 import ModalHelper from "../../helpers/modal.helper";
+import {
+  CarousselMenu,
+  CartCard,
+  CartDetail,
+  SectionMenu,
+} from "../../features";
 
 const Homepage: React.FC = () => {
   const isMobile = useIsMobile();
   const menuDetails = useAppSelector(selectMenuDetails);
   const cartDetails = useAppSelector(selectCartDetails);
   const restaurantDetails = useAppSelector(selectSelectedRestaurantDetails);
-  console.log(cartDetails);
   const dispatch = useAppDispatch();
 
   const handleClosemodal = () => {
@@ -30,7 +31,7 @@ const Homepage: React.FC = () => {
   const handleOpenModal = () => {
     ModalHelper.Show({
       children: (
-        <CartDetailComponent
+        <CartDetail
           onClose={handleClosemodal}
           cartDetails={cartDetails?.cart as Cart[]}
           currency={String(restaurantDetails?.currency)}
