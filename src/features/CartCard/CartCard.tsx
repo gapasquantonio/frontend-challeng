@@ -54,7 +54,7 @@ function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
                     align-items: flex-start;
                     align-self: stretch;
                     border-bottom: 1px solid var(--background-subtle, #eee);
-                    background: var(--White, #fff);
+                    background: ${theme.colors.white};
                   `}
                   justifyContent="space-between"
                 >
@@ -79,7 +79,12 @@ function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
                         </StyledText>
                       </Flex>
                     )}
-                    <Flex padding="8px" justifyContent="space-between" gap={4}>
+                    <Flex
+                      padding="8px"
+                      justifyContent="space-around"
+                      alignItems="center"
+                      maxWidth="90px"
+                    >
                       <Flex>
                         <IconMinusComponentMobile />
                       </Flex>
