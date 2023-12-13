@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Pages from "./pages";
 import { css, Global } from "@emotion/react";
 import { useResizeDetector } from "react-resize-detector";
+import { ContainerModal } from "./features";
 
 const globalStyles = css`
   html,
@@ -30,7 +31,7 @@ function App() {
             <>
               <Global styles={globalStyles} />
               <div css={fullHeightAndWidth} ref={ref}>
-                <PagesCasted />
+                <PagesCasted /> <ContainerModal />
               </div>
             </>
           }
