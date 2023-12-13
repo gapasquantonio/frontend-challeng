@@ -4,10 +4,12 @@ import { Item } from "../../models/MenuDetails";
 import styles from "./SectionItem.styles";
 
 import ItemDetail from "../ItemDetail";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { closeModal } from "../../store/modal/modal.slice";
+import { selectCartDetails } from "../../store/cart/cart.slice";
 import theme from "../../theme";
 import { StyledText } from "../../components/Text";
+import { css } from "@emotion/react";
 import ModalHelper from "../../helpers/modal.helper";
 export interface SectionMenuComponentProps {
   sectionItemDetails: Item;
@@ -21,7 +23,11 @@ function SectionItemComponent({
   isMobile,
 }: SectionMenuComponentProps) {
   const { name, description, price, images, id } = sectionItemDetails ?? {};
+  const cartDetails = useAppSelector(selectCartDetails);
 
+  const CartQuantity =
+    cartDetails?.cart?.find((cartItem) => cartItem.item.id === id)?.qty ??
+    undefined;
   const dispatch = useAppDispatch();
 
   const handleClosemodal = () => {
@@ -43,6 +49,26 @@ function SectionItemComponent({
     <Flex flex={1} paddingY={16} onClick={handleOpenModal}>
       <Flex flex={1} paddingRight={16} flexDirection="column">
         <Flex gap={2} alignItems="center">
+          {CartQuantity && (
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              borderRadius={4}
+              background={theme.colors.brown}
+              height={18}
+              width={18}
+            >
+              <StyledText
+                variant="chip"
+                color={theme.colors.white}
+                css={css`
+                  align-items: center;
+                `}
+              >
+                {CartQuantity}
+              </StyledText>
+            </Flex>
+          )}
           <Flex>
             <StyledText variant="h2" color={theme.colors.main}>
               {name}
