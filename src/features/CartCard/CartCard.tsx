@@ -15,7 +15,6 @@ export interface CartCardComponentProps {
 }
 
 function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
-  console.log("cartDetails", cartDetails);
   const totalSum = cartDetails?.reduce((sum, item) => sum + item.itemAmount, 0);
   return (
     <CartCardContainer>

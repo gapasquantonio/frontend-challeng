@@ -4,5 +4,5 @@ export type Cart = {
   item: Item;
   qty: number;
   itemAmount: number;
-  modifierSelected?: ModifierItem[];
+  modifierSelected: ModifierItem[];
 };
