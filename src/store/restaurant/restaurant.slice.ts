@@ -56,10 +56,9 @@ export const { setSelectedRestaurant } = relatorioSlice.actions;
 export const fetchSelectedRestaurantDetails = createAsyncThunk(
   "restaurant/fetchSelectedRestaurantDetailsById",
   async (restaurantId: string) => {
-    const a = await restaurantService.fetchSelectedRestaurantDetailsById(
-      restaurantId
-    );
-    return a;
+    const restaurantDetails =
+      await restaurantService.fetchSelectedRestaurantDetailsById(restaurantId);
+    return restaurantDetails;
   }
 );
 

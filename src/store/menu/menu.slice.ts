@@ -231,8 +231,8 @@ const menuSlice = createSlice({
 export const fetchSelectedRestaurantDetails = createAsyncThunk(
   "restaurant/fetchSelectedRestaurantDetailsById",
   async (restaurantId: string) => {
-    const a = await menuService.fetchMenuDetailsById(restaurantId);
-    return a;
+    const menuDetails = await menuService.fetchMenuDetailsById(restaurantId);
+    return menuDetails;
   }
 );
 
