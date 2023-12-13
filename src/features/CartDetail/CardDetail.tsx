@@ -22,7 +22,6 @@ function CartDetailComponent({
   cartDetails,
   currency,
 }: ItemDetailComponentProps) {
-  console.log("cartDetails", cartDetails);
   const totalSum = cartDetails.reduce((sum, item) => sum + item.itemAmount, 0);
 
   return (

@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import useIsMobile from "./hooks/useIsMobile";
-import { TopNavigation } from "./features";
 import theme from "./theme";
+import TopNavigation from "./features/TopNavigation";
 
 export type TopNavContainerProps = {
   headerAndFooterHeight: number;
@@ -31,10 +31,10 @@ export default function Layout() {
 
   const getFooterAndHeaderTotalHeigth = (): number => {
     if (!isMobile) {
-      return 202;
+      return 0;
     }
 
-    return 214;
+    return 0;
   };
 
   return (
