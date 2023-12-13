@@ -43,11 +43,12 @@ function SectionItemComponent({
       ),
     });
   };
+  console.log("CartQuantity", CartQuantity);
   return (
     <Flex flex={1} paddingY={16} onClick={handleOpenModal}>
       <Flex flex={1} paddingRight={16} flexDirection="column">
         <Flex gap={2} alignItems="center">
-          {CartQuantity && (
+          {CartQuantity !== 0 && CartQuantity && (
             <Flex
               justifyContent="center"
               alignItems="center"

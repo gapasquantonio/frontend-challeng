@@ -1,7 +1,10 @@
 import { Cart } from "../models/Cart";
 import { Item, ModifierItem } from "../models/MenuDetails";
+import { setUpdateItemToCartById } from "../store/cart/cart.slice";
+import { useAppDispatch } from "../store/hooks";
 
 function useCart() {
+  const dispatch = useAppDispatch();
   const checkIfItemAlreadyWasAddedInsideCart = (
     selectedItem: number,
     updatedCart: Cart[]
@@ -83,14 +86,58 @@ function useCart() {
       qty: itemQuantity + itemToBeUpdated?.qty,
       itemAmount: totalAmout + itemToBeUpdated?.itemAmount,
     };
-    console.log("updatedItemCart", updatedItemCart);
     return updatedItemCart;
   };
+
+  function getNewPrice(cart: Cart, updatedQuantity: number) {
+    return cart.item.price * updatedQuantity;
+  }
+  function updateItemQuantity(
+    cart: Cart,
+    action: "increase" | "decrease",
+    modifierId?: number
+  ) {
+    if (!modifierId) {
+      const updatedQuantity =
+        action === "increase"
+          ? cart.qty + 1
+          : action === "decrease" && cart.qty > 1
+          ? cart.qty - 1
+          : 0;
+      const updatedCartItem = {
+        ...cart,
+        itemAmount: getNewPrice(cart, updatedQuantity),
+        qty: updatedQuantity,
+      };
+
+      dispatch(setUpdateItemToCartById(updatedCartItem));
+      return;
+    } else {
+      const selectedModifier = cart.modifierSelected.find(
+        (modifier) => modifier.id === modifierId
+      );
+      if (selectedModifier) {
+        const updatedItem = {
+          ...selectedModifier,
+          qty:
+            action === "increase"
+              ? (selectedModifier.qty || 0) + 1
+              : action === "decrease" &&
+                selectedModifier.qty &&
+                selectedModifier.qty > 1
+              ? selectedModifier.qty - 1
+              : 0,
+        };
+        console.log("updatedItem", updatedItem);
+      }
+    }
+  }
 
   return {
     checkIfItemAlreadyWasAddedInsideCart,
     preparePayloadItemToBeAdded,
     preparePayloadItemToBeUpdated,
+    updateItemQuantity,
   };
 }
 

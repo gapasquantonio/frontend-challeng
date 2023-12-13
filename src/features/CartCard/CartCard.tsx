@@ -8,6 +8,7 @@ import {
   IconPlusComponentMobile,
 } from "../../assets/icons";
 import { Flex, StyledText } from "../../components";
+import { CartListItem } from "..";
 
 export interface CartCardComponentProps {
   cartDetails: Cart[];
@@ -46,79 +47,11 @@ function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
           >
             {cartDetails.map((cartDetail) => {
               return (
-                <Flex
+                <CartListItem
+                  cartDetail={cartDetail}
+                  currency={currency}
                   key={cartDetail.item.id}
-                  css={css`
-                    padding: 8px 16px;
-                    align-items: flex-start;
-                    align-self: stretch;
-                    border-bottom: 1px solid var(--background-subtle, #eee);
-                    background: ${theme.colors.white};
-                  `}
-                  justifyContent="space-between"
-                >
-                  <Flex flexDirection="column" gap={2}>
-                    <Flex>
-                      <StyledText variant="h4" color={theme.colors.main}>
-                        {cartDetail.item.name}
-                      </StyledText>
-                    </Flex>
-                    {cartDetail.item.description && (
-                      <Flex
-                        css={css`
-                          overflow: hidden;
-                          text-overflow: ellipsis;
-                          display: -webkit-box;
-                          -webkit-line-clamp: 2;
-                          -webkit-box-orient: vertical;
-                        `}
-                      >
-                        <StyledText variant="h4" color={theme.colors.inactive}>
-                          {cartDetail.item.description}
-                        </StyledText>
-                      </Flex>
-                    )}
-                    <Flex
-                      padding="8px"
-                      justifyContent="space-around"
-                      alignItems="center"
-                      maxWidth="90px"
-                    >
-                      <Flex>
-                        <IconMinusComponentMobile />
-                      </Flex>
-                      <Flex
-                        css={css`
-                          text-align: center;
-                          font-feature-settings: "clig" off, "liga" off;
-                        `}
-                      >
-                        <StyledText
-                          variant="subtitle"
-                          color={theme.colors.main}
-                        >
-                          {cartDetail.qty}
-                        </StyledText>
-                      </Flex>
-                      <Flex>
-                        <IconPlusComponentMobile />
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    css={css`
-                      text-align: right;
-                      font-feature-settings: "clig" off, "liga" off;
-                      letter-spacing: 0.5px;
-                      min-width: 80px;
-                      justify-content: end;
-                    `}
-                  >
-                    <StyledText variant="h3" color={theme.colors.main}>
-                      {currency} {cartDetail.itemAmount.toFixed(2)}
-                    </StyledText>
-                  </Flex>
-                </Flex>
+                />
               );
             })}
           </Flex>

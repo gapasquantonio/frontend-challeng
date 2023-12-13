@@ -18,10 +18,13 @@ const cartSlice = createSlice({
       return Object.assign({}, state, { cart: updatedState });
     },
     setUpdateItemToCartById: (state, { payload }: PayloadAction<Cart>) => {
-      const a = state?.cart?.map((item) => {
-        return item.item.id === payload.item.id ? payload : item;
-      });
-      console.log("payload", payload);
+      const a = state?.cart
+        ?.map((item) => {
+          return item.item.id === payload.item.id ? payload : item;
+        })
+        .filter((cart) => {
+          return cart.qty !== 0;
+        });
       console.log("a", a);
       const newState = Object.assign({}, state, { cart: a });
       return newState;
