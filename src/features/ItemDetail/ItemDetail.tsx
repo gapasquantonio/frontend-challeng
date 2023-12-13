@@ -12,7 +12,11 @@ import {
   IconPlusComponent,
   IconMinusComponent,
 } from "../../assets/icons";
-import { selectCartDetails } from "../../store/cart/cart.slice";
+import {
+  selectCartDetails,
+  setAddItemToCart,
+  setUpdateItemToCartById,
+} from "../../store/cart/cart.slice";
 
 export interface ItemDetailComponentProps {
   onClose: () => void;
