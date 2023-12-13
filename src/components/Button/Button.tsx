@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import { Button } from "./Button.styles";
-import theme from "../../theme";
 
 interface NavBarMenuItemProps {
   children: ReactNode;
@@ -13,12 +12,7 @@ function ButtonComponent(props: NavBarMenuItemProps) {
   const { children, onClick, isDisabled, className } = props;
 
   return (
-    <Button
-      onClick={onClick}
-      css={className}
-      disabled={isDisabled}
-      color={theme.colors.brown}
-    >
+    <Button onClick={onClick} css={className} disabled={isDisabled}>
       {children}
     </Button>
   );
