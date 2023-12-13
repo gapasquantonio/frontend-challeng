@@ -1,11 +1,15 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import deviceSlice from "./device/device.slice";
 import modalSlice from "./modal/modal.slice";
+import restaurantSlice from "./restaurant/restaurant.slice";
+import menuSlice from "./menu/menu.slice";
 
 export const store = configureStore({
   reducer: {
     device: deviceSlice,
     modal: modalSlice,
+    restaurant: restaurantSlice,
+    menu: menuSlice,
   },
 });
 
