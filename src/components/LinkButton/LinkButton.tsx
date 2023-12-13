@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { LinkButton } from "./LinkButton.styles";
 import theme from "../../theme";
-import { StyledText } from "../Text";
+import { StyledText } from "..";
 
 interface NavBarMenuItemProps {
   children: ReactNode;
