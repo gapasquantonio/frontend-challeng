@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./CarousselItemComponent.styles";
-import Flex from "../Flex";
-import { MenuSection } from "../../models/MenuDetails";
-import { StyledText } from "../Text";
+import Flex from "../../Flex";
+import { MenuSection } from "../../../models/MenuDetails";
+import { StyledText } from "../../Text";
 
 interface NavBarMenuItemProps {
   selected: boolean;
