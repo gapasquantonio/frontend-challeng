@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { useAppDispatch } from "./store/hooks";
 import Pages from "./pages";
 import { css, Global } from "@emotion/react";
 import { useResizeDetector } from "react-resize-detector";
-import { ContainerModal } from "./features";
+import { useEffect } from "react";
+import { setDeviceWidth } from "./store/device/device.slice";
+import ContainerModal from "./features/ContainerModal/ContainerModal";
 
 const globalStyles = css`
   html,
@@ -20,8 +22,12 @@ const fullHeightAndWidth = {
 };
 function App() {
   const PagesCasted = Pages as unknown as React.FC;
-  const { ref } = useResizeDetector({ handleHeight: false });
+  const { width, ref } = useResizeDetector({ handleHeight: false });
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(setDeviceWidth(width));
+  }, [width]);
   return (
     <BrowserRouter>
       <Routes>
@@ -31,7 +37,8 @@ function App() {
             <>
               <Global styles={globalStyles} />
               <div css={fullHeightAndWidth} ref={ref}>
-                <PagesCasted /> <ContainerModal />
+                <PagesCasted />
+                <ContainerModal />
               </div>
             </>
           }
