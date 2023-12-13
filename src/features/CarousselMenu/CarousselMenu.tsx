@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Flex from "../../components/Flex";
 import { MenuSection } from "../../models/MenuDetails";
-import CarousselItem from "../../components/CarousselItem";
+import CarousselItem from "../../components/Button/CarousselItem";
 import theme from "../../theme";
 export interface CarousselMenuComponentProps {
   carousselItensList: MenuSection[];
