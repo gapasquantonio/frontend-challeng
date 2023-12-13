@@ -1,14 +1,12 @@
 import React from "react";
-import Flex from "../../components/Flex";
 import { Item } from "../../models/MenuDetails";
 import styles from "./SectionItem.styles";
-
 import ItemDetail from "../ItemDetail";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { closeModal } from "../../store/modal/modal.slice";
 import { selectCartDetails } from "../../store/cart/cart.slice";
 import theme from "../../theme";
-import { StyledText } from "../../components/Text";
+import { StyledText, Flex } from "../../components";
 import { css } from "@emotion/react";
 import ModalHelper from "../../helpers/modal.helper";
 export interface SectionMenuComponentProps {

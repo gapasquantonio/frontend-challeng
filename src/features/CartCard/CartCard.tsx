@@ -1,5 +1,4 @@
 import React from "react";
-import Flex from "../../components/Flex";
 import { CartCardContainer } from "./CartCard.styles";
 import { Cart } from "../../models/Cart";
 import { css } from "@emotion/react";
@@ -8,7 +7,7 @@ import {
   IconMinusComponentMobile,
   IconPlusComponentMobile,
 } from "../../assets/icons";
-import { StyledText } from "../../components";
+import { Flex, StyledText } from "../../components";
 
 export interface CartCardComponentProps {
   cartDetails: Cart[];

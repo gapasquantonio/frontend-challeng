@@ -3,7 +3,7 @@ import { useAppSelector } from "../../store/hooks";
 import { selectModal } from "../../store/modal/modal.slice";
 import { ContainerModal } from "./ContainerModal.styles";
 import { Modal as ModalType } from "../../models/Modal";
-import Modal from "../../components/Modal";
+import { Modal } from "../../components";
 
 interface ContainerProps {}
 

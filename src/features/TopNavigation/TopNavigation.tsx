@@ -4,11 +4,9 @@ import { useAppSelector } from "../../store/hooks";
 import { selectSelectedRestaurantDetails } from "../../store/restaurant/restaurant.slice";
 import useIsMobile from "../../hooks/useIsMobile";
 import { useNavigate } from "react-router-dom";
-import NavbarMenuItem from "../../components/NavbarItemMenu/NavbarMenuItem";
-
-import Flex from "../../components/Flex";
 import { css } from "@emotion/react";
 import { HamburguerIcon } from "../../assets/icons";
+import { Flex, NavbarItemMenu } from "../../components";
 export interface MockedNavbarItens {
   onClick: () => void;
   title: string;
@@ -42,7 +40,7 @@ function TopNavigation() {
           <TopNavigationMenu isMobile={isMobile} webSettings={webSettings}>
             <Flex flexDirection="column">
               <Flex alignItems="center">
-                <NavbarMenuItem
+                <NavbarItemMenu
                   title={mockedNavbarItens[selectedItem].title}
                   onClick={mockedNavbarItens[selectedItem].onClick}
                   selected={false}
@@ -61,7 +59,7 @@ function TopNavigation() {
                   {mockedNavbarItens &&
                     mockedNavbarItens.map(({ title, onClick }, index) => {
                       return (
-                        <NavbarMenuItem
+                        <NavbarItemMenu
                           title={title}
                           onClick={onClick}
                           selected={selectedItem === index}
@@ -78,7 +76,7 @@ function TopNavigation() {
             {mockedNavbarItens &&
               mockedNavbarItens.map(({ title, onClick }, index) => {
                 return (
-                  <NavbarMenuItem
+                  <NavbarItemMenu
                     title={title}
                     onClick={onClick}
                     selected={selectedItem === index}

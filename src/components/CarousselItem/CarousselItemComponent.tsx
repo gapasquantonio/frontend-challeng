@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./CarousselItemComponent.styles";
-import Flex from "../../Flex";
-import { MenuSection } from "../../../models/MenuDetails";
-import { StyledText } from "../../Text";
+import Flex from "../Flex";
+import { MenuSection } from "../../models/MenuDetails";
+import { StyledText } from "..";
 
 interface NavBarMenuItemProps {
   selected: boolean;
@@ -10,7 +10,7 @@ interface NavBarMenuItemProps {
   onClick: () => void;
 }
 
-function NavbarMenuItem(props: NavBarMenuItemProps) {
+function CarroussellItem(props: NavBarMenuItemProps) {
   const { selected, sectionDetails, onClick } = props;
   const { name, images } = sectionDetails;
 
@@ -43,4 +43,4 @@ function NavbarMenuItem(props: NavBarMenuItemProps) {
   );
 }
 
-export default React.memo(NavbarMenuItem);
+export default React.memo(CarroussellItem);

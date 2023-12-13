@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./HomePage.styles";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import useIsMobile from "../../hooks/useIsMobile";
-import Flex from "../../components/Flex";
 import CarousselMenu from "../../features/CarousselMenu";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectMenuDetails } from "../../store/menu/menu.slice";
@@ -10,8 +8,7 @@ import { MenuSection } from "../../models/MenuDetails";
 import SectionMenu from "../../features/SectionMenu";
 import CartCard from "../../features/CartCard/CartCard";
 import { css } from "@emotion/react";
-import Button from "../../components/Button/Button";
-import LinkButton from "../../components/LinkButton";
+import { LinkButton, Button, Flex, SearchBar } from "../../components/";
 import { selectCartDetails } from "../../store/cart/cart.slice";
 import { closeModal } from "../../store/modal/modal.slice";
 import { CartDetailComponent } from "../../features/CartDetail";
