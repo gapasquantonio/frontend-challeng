@@ -1,10 +1,9 @@
 import React from "react";
-import Flex from "../../components/Flex";
 import { MenuSection } from "../../models/MenuDetails";
 import SectionItem from "../SectionItem";
 import { useAppSelector } from "../../store/hooks";
 import { selectSelectedRestaurantDetails } from "../../store/restaurant/restaurant.slice";
-import { StyledText } from "../../components/Text";
+import { StyledText, Flex } from "../../components";
 import theme from "../../theme";
 import { ArrowIcon } from "../../assets/icons";
 export interface SectionMenuComponentProps {

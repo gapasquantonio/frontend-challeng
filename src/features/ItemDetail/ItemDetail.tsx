@@ -1,11 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Flex from "../../components/Flex";
 import styles, { RadioButton } from "./ItemDetail.styles";
-import Button from "../../components/Button/Button";
 import { css } from "@emotion/react";
 import { Item, ModifierItem } from "../../models/MenuDetails";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { StyledText } from "../../components/Text";
+import { StyledText, Flex, Button } from "../../components/";
 import theme from "../../theme";
 import {
   CloseIcon,

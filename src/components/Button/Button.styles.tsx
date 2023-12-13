@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import theme from "../../theme";
 
 export const Button = styled.button`
   width: 100%;
@@ -8,4 +9,5 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   display: flex;
+  background: ${theme.colors.brown};
 `;

@@ -1,14 +1,13 @@
 import React from "react";
-import Flex from "../../components/Flex";
 import { CartCardContainer } from "./CartCard.styles";
 import { Cart } from "../../models/Cart";
 import { css } from "@emotion/react";
-import { StyledText } from "../../components/Text";
 import theme from "../../theme";
 import {
   IconMinusComponentMobile,
   IconPlusComponentMobile,
 } from "../../assets/icons";
+import { Flex, StyledText } from "../../components";
 
 export interface CartCardComponentProps {
   cartDetails: Cart[];
@@ -55,7 +54,7 @@ function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
                     align-items: flex-start;
                     align-self: stretch;
                     border-bottom: 1px solid var(--background-subtle, #eee);
-                    background: var(--White, #fff);
+                    background: ${theme.colors.white};
                   `}
                   justifyContent="space-between"
                 >
@@ -80,7 +79,12 @@ function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
                         </StyledText>
                       </Flex>
                     )}
-                    <Flex padding="8px" justifyContent="space-between" gap={4}>
+                    <Flex
+                      padding="8px"
+                      justifyContent="space-around"
+                      alignItems="center"
+                      maxWidth="90px"
+                    >
                       <Flex>
                         <IconMinusComponentMobile />
                       </Flex>

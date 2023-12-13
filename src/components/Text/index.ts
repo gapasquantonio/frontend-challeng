@@ -1,1 +1,1 @@
-export { default as StyledText } from "./Text";
+export { default } from "./Text";

@@ -1,1 +1,1 @@
-export { default as CartDetailComponent } from "./CardDetail";
+export { default } from "./CardDetail";
