@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import deviceSlice from "./device/device.slice";
+import modalSlice from "./modal/modal.slice";
 
 export const store = configureStore({
   reducer: {
     device: deviceSlice,
+    modal: modalSlice,
   },
 });
 
