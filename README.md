@@ -1,7 +1,7 @@
 # <div align="center">📋 QikServ Front End Test</div>
 
 <a href="https://qikserv-gabriel-pasquantonio.netlify.app/">
-<img src="./readme-image.png"/>
+<img src="./readme-image.jpeg">
                              </a>
 
 ## QikServ Front End Test
