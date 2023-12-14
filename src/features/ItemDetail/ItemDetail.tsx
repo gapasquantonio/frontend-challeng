@@ -153,7 +153,7 @@ function ItemDetailComponent({
               <Flex
                 flexDirection="column"
                 overflowY="scroll"
-                maxHeight={isMobile ? "" : 24120}
+                maxHeight={isMobile ? "" : 100}
               >
                 {modifiers.map((modifier) => {
                   return modifier.items.map((modifieritem) => {
