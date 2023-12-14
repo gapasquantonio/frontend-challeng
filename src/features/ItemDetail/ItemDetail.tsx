@@ -37,7 +37,7 @@ function ItemDetailComponent({
   const [basePrice, setBasePrice] = useState(price);
   const [totalAmount, setTotalAmount] = useState(0);
   const {
-    checkIfItemAlreadyWasAddedInsideCart,
+    findItemAddedIntoCart,
     preparePayloadItemToBeAdded,
     preparePayloadItemToBeUpdated,
   } = useCart();
@@ -66,7 +66,7 @@ function ItemDetailComponent({
     setTotalAmount(basePrice * ItemQuantityCounter);
   }, [ItemQuantityCounter]);
   const handleAddItemToCart = () => {
-    const isItemAleadyAddedToCart = checkIfItemAlreadyWasAddedInsideCart(
+    const isItemAleadyAddedToCart = findItemAddedIntoCart(
       id,
       cartDetails?.cart as Cart[]
     );

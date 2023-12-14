@@ -10,10 +10,7 @@ function useCart() {
   const dispatch = useAppDispatch();
   const cartDetails = useAppSelector(selectCartDetails);
 
-  const checkIfItemAlreadyWasAddedInsideCart = (
-    selectedItem: number,
-    updatedCart: Cart[]
-  ) => {
+  const findItemAddedIntoCart = (selectedItem: number, updatedCart: Cart[]) => {
     return updatedCart?.find((cart) => {
       if (!cart.item) {
         return;
@@ -41,7 +38,7 @@ function useCart() {
     updatedCart: Cart[],
     modifierSelected?: ModifierItem
   ) => {
-    const itemToBeUpdated = checkIfItemAlreadyWasAddedInsideCart(
+    const itemToBeUpdated = findItemAddedIntoCart(
       itemDetails?.id,
       updatedCart
     ) as Cart;
@@ -66,8 +63,6 @@ function useCart() {
       );
 
       if (existingModifierIndex !== -1) {
-        // Se o item já existe, atualize apenas a propriedade necessária
-
         updatedModifiers[existingModifierIndex] = {
           ...updatedModifiers[existingModifierIndex],
           qty: updatedModifiers[existingModifierIndex]?.qty
@@ -75,7 +70,6 @@ function useCart() {
             : quantitty,
         };
       } else {
-        // Se o item não existe, adicione-o à lista
         updatedModifiers.push({ ...selectedModifier, qty: quantitty });
       }
 
@@ -149,29 +143,29 @@ function useCart() {
     }
   }
   const getCartQuantity = (itemId: number) => {
-    const a = cartDetails?.cart?.find(
+    const selectedCard = cartDetails?.cart?.find(
       (cartItem) => cartItem.item.id === itemId
     );
 
-    if (!a?.modifierSelected) {
-      return a?.qty;
+    if (!selectedCard?.modifierSelected) {
+      return selectedCard?.qty;
     }
-    const totalQuantity = a.modifierSelected.reduce(
+    const totalQuantity = selectedCard.modifierSelected.reduce(
       (sum, item) => sum + item?.qty!,
       0
     );
     return totalQuantity;
   };
   const getCartTotalItemPrice = (itemId: number) => {
-    const a = cartDetails?.cart?.find(
+    const selectedCard = cartDetails?.cart?.find(
       (cartItem) => cartItem?.item.id === itemId
     );
-    if (!a?.modifierSelected) {
-      return a?.itemAmount as number;
+    if (!selectedCard?.modifierSelected) {
+      return selectedCard?.itemAmount as number;
     }
 
-    const totalSum = a.modifierSelected.reduce(
-      (sum, item) => item?.price * (item?.qty ?? a.qty) + sum,
+    const totalSum = selectedCard.modifierSelected.reduce(
+      (sum, item) => item?.price * (item?.qty ?? selectedCard.qty) + sum,
       0
     );
 
@@ -179,7 +173,7 @@ function useCart() {
   };
 
   return {
-    checkIfItemAlreadyWasAddedInsideCart,
+    findItemAddedIntoCart,
     preparePayloadItemToBeAdded,
     preparePayloadItemToBeUpdated,
     updateItemQuantity,
