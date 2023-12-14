@@ -89,7 +89,11 @@ const Homepage: React.FC = () => {
         {!isMobile && (
           <Flex>
             <CartCard
-              cartDetails={cartDetails?.cart as Cart[]}
+              cartDetails={
+                cartDetails?.cart?.filter(
+                  (cart) => cart?.modifierSelected?.length !== 0
+                ) as Cart[]
+              }
               currency={String(restaurantDetails?.currency)}
             />
           </Flex>
