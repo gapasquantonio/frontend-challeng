@@ -157,7 +157,7 @@ function useCart() {
       return a?.qty;
     }
     const totalQuantity = a.modifierSelected.reduce(
-      (sum, item) => sum + item?.qty,
+      (sum, item) => sum + item?.qty!,
       0
     );
     return totalQuantity;
