@@ -71,14 +71,7 @@ See [how to install yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-
 yarn
 ```
 
-### 3. (Optional) Start storybook
-
-```zsh
-yarn storybook
-# will start at http://localhost:6006/
-```
-
-### 4. Start development server
+### 3. Start development server
 
 Instead of using storybook, you can use the dev server.
 
@@ -87,14 +80,6 @@ yarn dev
 ```
 
 The application will open in the browser on http://localhost:3000
-
-## Test
-
-Run this project's tests
-
-```bash
-$ yarn test
-```
 
 ## Commits
 
