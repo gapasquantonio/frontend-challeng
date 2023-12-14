@@ -140,7 +140,7 @@ function useCart() {
         updatedModifiers[selectedModifierIndex] = updatedItem;
         const updatedCart = {
           ...cart,
-          modifierSelected: updatedModifiers,
+          modifierSelected: updatedModifiers.filter((item) => item.qty !== 0),
         };
 
         dispatch(setUpdateItemToCartById(updatedCart));
@@ -177,6 +177,7 @@ function useCart() {
 
     return totalSum;
   };
+
   return {
     checkIfItemAlreadyWasAddedInsideCart,
     preparePayloadItemToBeAdded,
