@@ -13,7 +13,7 @@ export type Item = {
   modifiers?: Modifier[];
 };
 
-type Modifier = {
+export type Modifier = {
   id: number;
   name: string;
   minChoices: number;

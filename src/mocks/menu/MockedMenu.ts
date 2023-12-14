@@ -1,5 +1,4 @@
 import { Menu } from "../../models/MenuDetails";
-import { Restaurant } from "../../models/Restaurant";
 
 const MockedMenu: Menu = {
   id: 14730,

@@ -4,11 +4,8 @@ import { CartTitle } from "./CardDetail.styles";
 import Button from "../../components/Button/Button";
 import { css } from "@emotion/react";
 import { Cart } from "../../models/Cart";
-import {
-  CloseIcon,
-  IconMinusComponentMobile,
-  IconPlusComponentMobile,
-} from "../../assets/icons";
+import { CloseIcon } from "../../assets/icons";
+import { CartListItem } from "..";
 
 export interface ItemDetailComponentProps {
   onClose: () => void;
@@ -56,112 +53,11 @@ function CartDetailComponent({
       </Flex>
       {cartDetails.map((cartDetail) => {
         return (
-          <Flex
+          <CartListItem
+            cartDetail={cartDetail}
+            currency={currency}
             key={cartDetail.item.id}
-            css={css`
-              padding: 8px 16px;
-              align-items: flex-start;
-              align-self: stretch;
-              border-bottom: 1px solid var(--background-subtle, #eee);
-              background: var(--White, #fff);
-            `}
-            justifyContent="space-between"
-          >
-            <Flex flexDirection="column" gap={2}>
-              <Flex
-                css={css`
-                  color: var(--copy-main, #121212);
-                  font-family: Roboto;
-                  font-size: 16px;
-                  font-style: normal;
-                  font-weight: 400;
-                  line-height: normal;
-                `}
-              >
-                {cartDetail.item.name}
-              </Flex>
-              {cartDetail.item.description && (
-                <Flex
-                  css={css`
-                    color: var(--cta-styling-state-inactive-copy, #5f5f5f);
-                    font-family: Roboto;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: normal;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                  `}
-                >
-                  {cartDetail.item.description}
-                </Flex>
-              )}
-              <Flex padding="8px" justifyContent="space-between" gap={4}>
-                <Flex
-                  css={css`
-                    color: var(--copy-main, #121212);
-                    text-align: center;
-                    font-feature-settings: "clig" off, "liga" off;
-                    font-family: Roboto;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: normal;
-                  `}
-                >
-                  <IconMinusComponentMobile />
-                </Flex>
-                <Flex
-                  css={css`
-                    color: var(--copy-main, #121212);
-                    text-align: center;
-                    font-feature-settings: "clig" off, "liga" off;
-                    font-family: Roboto;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: normal;
-                  `}
-                >
-                  {cartDetail.qty}
-                </Flex>
-                <Flex
-                  css={css`
-                    color: var(--copy-main, #121212);
-                    text-align: center;
-                    font-feature-settings: "clig" off, "liga" off;
-                    font-family: Roboto;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: normal;
-                  `}
-                >
-                  <IconPlusComponentMobile />
-                </Flex>
-              </Flex>
-            </Flex>
-            <Flex
-              css={css`
-                color: var(--copy-main, #121212);
-                text-align: right;
-                font-feature-settings: "clig" off, "liga" off;
-                font-family: Roboto;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 500;
-                line-height: normal;
-                letter-spacing: 0.5px;
-                min-width: 80px;
-                justify-content: end;
-              `}
-            >
-              {currency} {cartDetail.itemAmount.toFixed(2)}
-            </Flex>
-          </Flex>
+          />
         );
       })}
 

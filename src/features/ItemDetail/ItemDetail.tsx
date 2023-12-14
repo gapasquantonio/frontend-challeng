@@ -15,6 +15,8 @@ import {
   setAddItemToCart,
   setUpdateItemToCartById,
 } from "../../store/cart/cart.slice";
+import useCart from "../../hooks/useCart";
+import { Cart } from "../../models/Cart";
 
 export interface ItemDetailComponentProps {
   onClose: () => void;
@@ -31,21 +33,26 @@ function ItemDetailComponent({
 }: ItemDetailComponentProps) {
   const { images, name, description, modifiers, price, id } = itemDetails;
   const [ItemQuantityCounter, setItemQuantiyCounter] = useState(1);
-  const [checkedOption, setCheckedOption] = useState<number>();
+  const [checkedOption, setCheckedOption] = useState<ModifierItem>();
   const [basePrice, setBasePrice] = useState(price);
   const [totalAmount, setTotalAmount] = useState(0);
+  const {
+    checkIfItemAlreadyWasAddedInsideCart,
+    preparePayloadItemToBeAdded,
+    preparePayloadItemToBeUpdated,
+  } = useCart();
   const dispatch = useAppDispatch();
   const isDisabled = basePrice === 0 && modifiers?.length !== 0;
   const cartDetails = useAppSelector(selectCartDetails);
   const handleCheckOption = (item: ModifierItem) => {
-    if (item.id === checkedOption) {
+    if (item.id === checkedOption?.id) {
       setBasePrice(0);
       return setCheckedOption(undefined);
     }
     setItemQuantiyCounter(1);
     setBasePrice(item.price);
     setTotalAmount(item.price);
-    setCheckedOption(item.id);
+    setCheckedOption(item);
   };
   const cart = useMemo(() => {
     return cartDetails && cartDetails?.cart;
@@ -61,65 +68,37 @@ function ItemDetailComponent({
   useEffect(() => {
     setTotalAmount(basePrice * ItemQuantityCounter);
   }, [ItemQuantityCounter]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleAddItemToCart = () => {
-    const teste = cart?.find((ca) => {
-      return ca?.item?.modifiers?.map((modifier) => {
-        return modifier.id === checkedOption
-          ? {
-              ...modifier,
-              items: [
-                {
-                  ...modifier?.items,
-                  qty: modifier?.items[0].qty
-                    ? +ItemQuantityCounter + modifier?.items[0].qty
-                    : ItemQuantityCounter,
-                },
-              ],
-            }
-          : modifier;
-      });
-    });
-
-    const testeA = cart?.find((ca) => {
-      return ca.item.id === id;
-    });
-
-    if (!!teste && checkedOption) {
-      const payload = {
-        item: itemDetails,
-        qty: ItemQuantityCounter + teste.qty,
-        itemAmount: totalAmount + teste.itemAmount,
-        modifierSelected: {
-          ...(teste?.modifierSelected as ModifierItem[]),
+    setIsLoading(true);
+    const isItemAleadyAddedToCart = checkIfItemAlreadyWasAddedInsideCart(
+      id,
+      cartDetails?.cart as Cart[]
+    );
+    if (!isItemAleadyAddedToCart) {
+      const payload = preparePayloadItemToBeAdded(
+        itemDetails,
+        {
+          totalAmout: totalAmount,
+          itemQuantity: ItemQuantityCounter,
         },
-      };
-      dispatch(setUpdateItemToCartById(payload));
+        checkedOption
+      );
+      dispatch(setAddItemToCart(payload));
+      setIsLoading(false);
       return onClose();
     }
-    if (testeA) {
-      const payload = {
-        item: itemDetails,
-        qty: ItemQuantityCounter + testeA.qty,
-        itemAmount: totalAmount + testeA.itemAmount,
-      };
-      dispatch(setUpdateItemToCartById(payload));
-      return onClose();
-    }
-    const payload = {
-      item: itemDetails,
-      qty: ItemQuantityCounter,
-      itemAmount: totalAmount,
-      modifierSelected: [
-        modifiers &&
-          modifiers[0] &&
-          modifiers[0]?.items?.find((item) => {
-            return item.id === checkedOption;
-          }),
-      ] as ModifierItem[],
-    };
-    dispatch(setAddItemToCart(payload));
-    onClose();
+    const updatePayload = preparePayloadItemToBeUpdated(
+      itemDetails,
+      {
+        totalAmout: totalAmount,
+        itemQuantity: ItemQuantityCounter,
+      },
+      cartDetails?.cart as Cart[],
+      checkedOption
+    );
+    dispatch(setUpdateItemToCartById(updatePayload));
+    return onClose();
   };
   return (
     <Flex
@@ -221,7 +200,7 @@ function ItemDetailComponent({
                           <Flex>
                             <RadioButton
                               type="radio"
-                              checked={checkedOption === modifieritem.id}
+                              checked={checkedOption?.id === modifieritem.id}
                               onClick={() => handleCheckOption(modifieritem)}
                             />
                           </Flex>
