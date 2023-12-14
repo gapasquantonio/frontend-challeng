@@ -10,4 +10,5 @@ export const Button = styled.button`
   align-items: center;
   display: flex;
   background: ${theme.colors.brown};
+  color: ${theme.colors.white};
 `;
