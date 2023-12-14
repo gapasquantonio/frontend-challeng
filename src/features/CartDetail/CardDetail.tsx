@@ -6,6 +6,7 @@ import { css } from "@emotion/react";
 import { Cart } from "../../models/Cart";
 import { CloseIcon } from "../../assets/icons";
 import { CartListItem } from "..";
+import useCart from "../../hooks/useCart";
 
 export interface ItemDetailComponentProps {
   onClose: () => void;
@@ -19,7 +20,11 @@ function CartDetailComponent({
   cartDetails,
   currency,
 }: ItemDetailComponentProps) {
-  const totalSum = cartDetails.reduce((sum, item) => sum + item.itemAmount, 0);
+  const { getCartTotalItemPrice } = useCart();
+  const totalSum = cartDetails?.reduce(
+    (sum, item) => sum + getCartTotalItemPrice(item?.item?.id as number),
+    0
+  );
 
   return (
     <Flex flexDirection="column" width={"100%"} height={"100%"}>
@@ -136,7 +141,7 @@ function CartDetailComponent({
       <Flex alignItems="end" flex={1} background="#f8f9fa" padding={24}>
         <Button
           onClick={() => {
-            console.log("a");
+            alert("Thanks for reviewing it!!!");
           }}
           isDisabled={false}
         >

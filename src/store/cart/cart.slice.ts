@@ -18,14 +18,21 @@ const cartSlice = createSlice({
       return Object.assign({}, state, { cart: updatedState });
     },
     setUpdateItemToCartById: (state, { payload }: PayloadAction<Cart>) => {
-      const a = state?.cart
+      const updatedCart = state?.cart
         ?.map((item) => {
           return item.item.id === payload.item.id ? payload : item;
         })
         .filter((cart) => {
-          return cart.qty !== 0;
+          return cart.qty > 0;
         });
-      const newState = Object.assign({}, state, { cart: a });
+      if (payload.modifierSelected) {
+        updatedCart?.filter(
+          (cart) =>
+            cart?.modifierSelected && cart?.modifierSelected.length !== 0
+        );
+      }
+
+      const newState = Object.assign({}, state, { cart: updatedCart });
       return newState;
     },
   },

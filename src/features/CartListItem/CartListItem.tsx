@@ -9,7 +9,6 @@ import {
 import styles from "./CartListItem.styles";
 import { css } from "@emotion/react";
 import useCart from "../../hooks/useCart";
-import CardDetail from "../CartDetail/CardDetail";
 
 export interface ItemDetailComponentProps {
   cartDetail: Cart;
@@ -21,6 +20,7 @@ function CartListItemComponent({
   currency,
 }: ItemDetailComponentProps) {
   const { updateItemQuantity, getCartTotalItemPrice } = useCart();
+
   return (
     <Flex key={cartDetail.item.id} css={styles.cardListitemContainer}>
       <Flex flexDirection="column" gap={2}>
@@ -99,7 +99,7 @@ function CartListItemComponent({
                   </Flex>
                 </Flex>
                 <Flex css={styles.cardListitemCurrency}>
-                  <StyledText variant="h3" color={theme.colors.main}>
+                  <StyledText variant="h3" color={theme.colors.inactive}>
                     {currency}
                     {(
                       (modifierSelectedItem?.qty ?? cartDetail?.qty) *
@@ -133,7 +133,7 @@ function CartListItemComponent({
       </Flex>
       <Flex css={styles.cardListitemCurrency}>
         <StyledText variant="h3" color={theme.colors.main}>
-          {currency} {getCartTotalItemPrice(cartDetail?.item?.id)}
+          {currency} {getCartTotalItemPrice(cartDetail?.item?.id).toFixed(2)}
         </StyledText>
       </Flex>
     </Flex>

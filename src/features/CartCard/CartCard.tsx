@@ -18,6 +18,7 @@ function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
     (sum, item) => sum + getCartTotalItemPrice(item?.item?.id as number),
     0
   );
+
   return (
     <CartCardContainer>
       <Flex paddingX={24} paddingY={16}>
