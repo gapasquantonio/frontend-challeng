@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles, { RadioButton } from "./ItemDetail.styles";
 import { css } from "@emotion/react";
 import { Item, ModifierItem } from "../../models/MenuDetails";
@@ -37,7 +37,7 @@ function ItemDetailComponent({
   const [basePrice, setBasePrice] = useState(price);
   const [totalAmount, setTotalAmount] = useState(0);
   const {
-    checkIfItemAlreadyWasAddedInsideCart,
+    findItemAddedIntoCart,
     preparePayloadItemToBeAdded,
     preparePayloadItemToBeUpdated,
   } = useCart();
@@ -54,9 +54,6 @@ function ItemDetailComponent({
     setTotalAmount(item.price);
     setCheckedOption(item);
   };
-  const cart = useMemo(() => {
-    return cartDetails && cartDetails?.cart;
-  }, [checkedOption, cartDetails?.cart]);
 
   const handleIncrease = () => {
     setItemQuantiyCounter((prev) => prev + 1);
@@ -68,10 +65,8 @@ function ItemDetailComponent({
   useEffect(() => {
     setTotalAmount(basePrice * ItemQuantityCounter);
   }, [ItemQuantityCounter]);
-  const [isLoading, setIsLoading] = useState(false);
   const handleAddItemToCart = () => {
-    setIsLoading(true);
-    const isItemAleadyAddedToCart = checkIfItemAlreadyWasAddedInsideCart(
+    const isItemAleadyAddedToCart = findItemAddedIntoCart(
       id,
       cartDetails?.cart as Cart[]
     );
@@ -84,8 +79,8 @@ function ItemDetailComponent({
         },
         checkedOption
       );
-      dispatch(setAddItemToCart(payload));
-      setIsLoading(false);
+      dispatch(setAddItemToCart(payload as Cart));
+
       return onClose();
     }
     const updatePayload = preparePayloadItemToBeUpdated(
