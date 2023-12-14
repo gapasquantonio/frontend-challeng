@@ -160,7 +160,6 @@ function useCart() {
       (sum, item) => sum + item?.qty,
       0
     );
-    console.log(totalQuantity);
     return totalQuantity;
   };
   const getCartTotalItemPrice = (itemId: number) => {
