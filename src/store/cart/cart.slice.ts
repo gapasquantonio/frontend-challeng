@@ -25,7 +25,6 @@ const cartSlice = createSlice({
         .filter((cart) => {
           return cart.qty !== 0;
         });
-      console.log("a", a);
       const newState = Object.assign({}, state, { cart: a });
       return newState;
     },

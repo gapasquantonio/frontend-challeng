@@ -18,9 +18,10 @@ const cardListitemDescription = css`
 `;
 const cardListitemSumContainer = css`
   padding: 8px;
+  gap: 4px;
   justifycontent: space-around;
   alignitems: center;
-  maxwidth: 90px;
+  maxwidth: 100px;
 `;
 const cardListitemCurrency = css`
   text-align: right;

@@ -9,6 +9,7 @@ import theme from "../../theme";
 import { StyledText, Flex } from "../../components";
 import { css } from "@emotion/react";
 import ModalHelper from "../../helpers/modal.helper";
+import useCart from "../../hooks/useCart";
 export interface SectionMenuComponentProps {
   sectionItemDetails: Item;
   currency: string;
@@ -21,11 +22,8 @@ function SectionItemComponent({
   isMobile,
 }: SectionMenuComponentProps) {
   const { name, description, price, images, id } = sectionItemDetails ?? {};
-  const cartDetails = useAppSelector(selectCartDetails);
-
-  const CartQuantity =
-    cartDetails?.cart?.find((cartItem) => cartItem.item.id === id)?.qty ??
-    undefined;
+  const { getCartQuantity } = useCart();
+  const CartQuantity = getCartQuantity(id);
   const dispatch = useAppDispatch();
 
   const handleClosemodal = () => {
@@ -43,7 +41,6 @@ function SectionItemComponent({
       ),
     });
   };
-  console.log("CartQuantity", CartQuantity);
   return (
     <Flex flex={1} paddingY={16} onClick={handleOpenModal}>
       <Flex flex={1} paddingRight={16} flexDirection="column">

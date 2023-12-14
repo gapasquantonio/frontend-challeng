@@ -3,12 +3,9 @@ import { CartCardContainer } from "./CartCard.styles";
 import { Cart } from "../../models/Cart";
 import { css } from "@emotion/react";
 import theme from "../../theme";
-import {
-  IconMinusComponentMobile,
-  IconPlusComponentMobile,
-} from "../../assets/icons";
 import { Flex, StyledText } from "../../components";
 import { CartListItem } from "..";
+import useCart from "../../hooks/useCart";
 
 export interface CartCardComponentProps {
   cartDetails: Cart[];
@@ -16,7 +13,11 @@ export interface CartCardComponentProps {
 }
 
 function CartCardComponent({ cartDetails, currency }: CartCardComponentProps) {
-  const totalSum = cartDetails?.reduce((sum, item) => sum + item.itemAmount, 0);
+  const { getCartTotalItemPrice } = useCart();
+  const totalSum = cartDetails?.reduce(
+    (sum, item) => sum + getCartTotalItemPrice(item?.item?.id as number),
+    0
+  );
   return (
     <CartCardContainer>
       <Flex paddingX={24} paddingY={16}>

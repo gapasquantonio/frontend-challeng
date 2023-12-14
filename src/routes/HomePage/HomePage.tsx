@@ -24,7 +24,6 @@ const Homepage: React.FC = () => {
   const cartDetails = useAppSelector(selectCartDetails);
   const restaurantDetails = useAppSelector(selectSelectedRestaurantDetails);
   const dispatch = useAppDispatch();
-  console.log("cartDetails", cartDetails);
   const handleClosemodal = () => {
     dispatch(closeModal());
   };

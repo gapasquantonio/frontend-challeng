@@ -97,7 +97,6 @@ function ItemDetailComponent({
       cartDetails?.cart as Cart[],
       checkedOption
     );
-    console.log("updatePayload", updatePayload);
     dispatch(setUpdateItemToCartById(updatePayload));
     return onClose();
   };
