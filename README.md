@@ -1,6 +1,6 @@
 # <div align="center">📋 QikServ Front End Test</div>
 
-<a href="https://blocksrvtfrontendtest.netlify.app/">
+<a href="https://qikserv-gabriel-pasquantonio.netlify.app/">
 <img src="./readme-image.png"/>
                              </a>
 
